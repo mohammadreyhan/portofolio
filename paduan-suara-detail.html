@@ -1,0 +1,51 @@
+<style>
+/* Scoped agar hanya berlaku di area detail timeline */
+.timeline-detail-content .detail-section { margin-top: 4px; }
+
+.timeline-detail-content .detail-title {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: .2px;
+}
+.timeline-detail-content .detail-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+/* List rapi + jarak nyaman; tetap pakai bullet aksen dari CSS global */
+.timeline-detail-content .detail-list {
+  list-style: none;
+  padding-left: 15px;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.timeline-detail-content .detail-list li {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* 2 kolom di layar lebar */
+@media (min-width: 900px) {
+  .timeline-detail-content .detail-list { grid-template-columns: 1fr 1fr; }
+}
+</style>
+
+<div class="detail-section">
+  <div class="detail-title">Rincian Kegiatan</div>
+  <ul class="detail-list">
+    <li>Mengikuti latihan intensif paduan suara selama 2 bulan untuk persiapan acara wisuda universitas.</li>
+    <li>Menyesuaikan harmonisasi dan dinamika vokal untuk mencapai kualitas suara yang optimal.</li>
+    <li>Menciptakan suasana yang meriah dan berkesan pada acara wisuda di YKR Convention Hall, Universitas Sains dan Teknologi Indonesia, serta menerima pujian dari panitia dan tamu undangan.</li>
+  </ul>
+</div>

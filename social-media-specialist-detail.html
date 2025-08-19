@@ -1,0 +1,52 @@
+<style>
+/* Scoped agar hanya berlaku di area detail timeline */
+.timeline-detail-content .sosmed-detail { margin-top: 4px; }
+
+.timeline-detail-content .sosmed-title {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: .2px;
+}
+.timeline-detail-content .sosmed-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+/* List rapi + jarak nyaman; tetap pakai bullet aksen dari CSS global */
+.timeline-detail-content .detail-list {
+  list-style: none;
+  padding-left: 15px;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.timeline-detail-content .detail-list li {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* 2 kolom di layar lebar */
+@media (min-width: 900px) {
+  .timeline-detail-content .detail-list { grid-template-columns: 1fr 1fr; }
+}
+</style>
+
+<div class="sosmed-detail">
+  <div class="sosmed-title">Rincian Tugas Utama</div>
+  <ul class="detail-list">
+    <li>Merencanakan dan menyusun strategi content plan yang menarik dan relevan untuk akun Instagram FYP Media Jakarta.</li>
+    <li>Menyampaikan laporan secara rutin kepada kepala divisi FYP Media Jakarta, disertai dengan analisis dan rekomendasi untuk strategi konten ke depan.</li>
+    <li>Menyusun jadwal konten untuk memastikan posting dilakukan pada waktu yang tepat untuk mencapai audiens yang lebih luas dan meningkatkan engagement.</li>
+    <li>Mengelola komunitas Instagram dengan aktif merespons komentar, pesan langsung, dan mention dari para pengikut.</li>
+  </ul>
+</div>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Kegiatan: Networking</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-start: #2AF598;
+            --accent-end: #009EFD;
+            --texture-dark: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .popup-content-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-header {
+            padding: 30px 40px 20px;
+            background: linear-gradient(45deg, rgba(42, 245, 152, 0.1), rgba(0, 158, 253, 0.1));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .popup-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .popup-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            border-radius: 2px;
+            animation: linePulse 3.3s infinite;
+        }
+
+        @keyframes linePulse {
+            0%, 100% { width: 80px; }
+            50% { width: 120px; }
+        }
+
+        .popup-header h2 span {
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .popup-header .subtitle {
+            color: var(--accent-end);
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        .popup-content-grid {
+            display: grid;
+            grid-template-columns: 60% 40%; /* Ubah ke rasio 60:40 */
+            gap: 30px; /* Gap antara kolom */
+            padding: 30px 40px;
+            align-items: flex-start; /* Align items ke atas */
+        }
+
+        .popup-image-grid {
+            /* Hapus flex properties karena sudah menggunakan grid */
+            columns: 2;
+            column-gap: 15px;
+            /* Hapus margin-right karena sudah menggunakan grid gap */
+        }
+
+        .popup-image-grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            break-inside: avoid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-image-grid img:hover {
+            transform: scale(1.03);
+        }
+
+        .popup-details {
+            /* Hapus flex properties karena sudah menggunakan grid */
+            padding: 20px;
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .popup-details h3 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .popup-details h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+        }
+
+        .detail-item {
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--accent-end);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-item p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .popup-description {
+            padding: 25px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .popup-description h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .popup-description h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+        }
+
+        .popup-description p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 992px) {
+            .popup-content-grid {
+                flex-direction: column;
+            }
+            
+            .popup-image-grid {
+                margin-right: 0;
+                margin-bottom: 30px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .popup-header {
+                padding: 20px;
+            }
+            
+            .popup-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .popup-content-grid {
+                padding: 20px;
+            }
+            
+            .popup-image-grid {
+                columns: 1;
+            }
+            
+            .popup-description {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .popup-content-detail {
+                border-radius: 10px;
+            }
+            
+            .popup-header {
+                padding: 15px;
+            }
+            
+            .popup-header h2 {
+                font-size: 1.3rem;
+                margin-bottom: 5px;
+            }
+            
+            .popup-header .subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .popup-header h2::after {
+                bottom: -5px;
+                width: 50px;
+                height: 3px;
+            }
+            
+            @keyframes linePulse {
+                0%, 100% { width: 50px; }
+                50% { width: 70px; }
+            }
+            
+            .popup-content-grid {
+                grid-template-columns: 1fr; /* Ubah menjadi satu kolom */
+                padding: 15px;
+                gap: 20px;
+            }
+            
+            .popup-image-grid {
+                columns: 1; /* Gambar satu kolom */
+                margin-bottom: 0;
+            }
+            
+            .popup-image-grid img {
+                margin-bottom: 10px;
+            }
+            
+            .popup-details {
+                padding: 15px;
+            }
+            
+            .popup-details h3 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+            
+            .detail-item {
+                margin-bottom: 12px;
+                padding-bottom: 12px;
+            }
+            
+            .detail-item strong {
+                font-size: 0.8rem;
+            }
+            
+            .detail-item p {
+                font-size: 0.9rem;
+            }
+            
+            .popup-description {
+                padding: 15px;
+            }
+            
+            .popup-description h3 {
+                font-size: 1.1rem;
+            }
+            
+            .popup-description p {
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+            
+            .close-popup-btn {
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+        }
+
+        /* Styling untuk tombol close yang lebih bagus dan rapi */
+        .close-popup-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(42, 245, 152, 0.1), rgba(0, 158, 253, 0.1));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-primary);
+            font-size: 22px;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1001;
+            text-decoration: none;
+            line-height: 1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-popup-btn:hover {
+            background: linear-gradient(135deg, rgba(42, 245, 152, 0.2), rgba(0, 158, 253, 0.2));
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            color: var(--accent-end);
+        }
+
+        .close-popup-btn:active {
+            transform: translateY(-1px) scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        /* Responsive adjustments untuk tombol close */
+        @media (max-width: 768px) {
+            .close-popup-btn {
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .close-popup-btn {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-content-detail">
+        <div class="popup-header">
+            <h2>Detail Kegiatan: <span>Workshop Machine Learning</span></h2>
+            <p class="subtitle">Python for Supervised Machine Learning & 10 AI Projects for Thesis</p>
+        </div>
+        
+        <div class="popup-content-grid">
+            <div class="popup-image-grid">
+                <img src="assets/images/aktifitas/workshop-1.jpeg" alt="Workshop 1">
+                <img src="assets/images/aktifitas/workshop-2.jpeg" alt="Workshop 2">
+                <img src="assets/images/aktifitas/workshop-3.jpeg" alt="Workshop 3">
+                <img src="assets/images/aktifitas/workshop-4.jpeg" alt="Workshop 4">
+            </div>
+            
+            <div class="popup-details">
+                <h3>Informasi Kegiatan</h3>
+                
+                <div class="detail-item">
+                    <strong>Tanggal Kegiatan</strong>
+                    <p>4-5 Maret 2024</p>
+                </div>
+                
+                <div class="detail-item">
+                    <strong>Lokasi Kegiatan</strong>
+                    <p>YKR Convention Hall</p>
+                </div>
+                
+                <div class="detail-item">
+                    <strong>Penyelenggara</strong>
+                    <p>STMIK Amik Riau (kini USTI)</p>
+                </div>
+                
+                <div class="detail-item">
+                    <strong>Narasumber</strong>
+                    <p>Deshinta Arrova Dewi, PhD & Dr. Tri Basuki Kurniawan</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="popup-description">
+            <h3>Deskripsi Kegiatan</h3>
+            <p>Mengikuti workshop yang diselenggarakan oleh STMIK Amik Riau (kini USTI) dengan dua topik menarik bagi mahasiswa, yaitu Python for Supervised Machine Learning dan 10 AI and Machine Learning Projects for Thesis. Kegiatan ini menghadirkan dua narasumber, Deshinta Arrova Dewi, PhD dari Faculty of Data Science and Information Technology - INTI, dan Dr. Tri Basuki Kurniawan dari Fakulti Teknologi dan Sains Maklumat (FTSM) - UKM, serta dihadiri oleh Kepala STMIK Amik Riau (kini USTI), Dr. Lusiana, M.Kom.</p>
+            <p>Pengalaman ini memperluas wawasan sekaligus mengasah keterampilan dalam bidang machine learning dan AI, serta memberikan insight berharga untuk pengembangan thesis dan proyek-proyek teknologi masa depan.</p>
+        </div>
+    </div>
+</body>
+</html>

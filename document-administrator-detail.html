@@ -1,0 +1,51 @@
+<style>
+    /* Scoped agar hanya berlaku di area detail timeline */
+    .timeline-detail-content .detail-section { margin-top: 4px; }
+    
+    .timeline-detail-content .detail-title {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: .2px;
+    }
+    .timeline-detail-content .detail-title::after {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+    
+    /* List rapi + jarak nyaman; tetap pakai bullet aksen dari CSS global */
+    .timeline-detail-content .detail-list {
+      list-style: none;
+      padding-left: 15px;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .timeline-detail-content .detail-list li {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    
+    /* 2 kolom di layar lebar */
+    @media (min-width: 900px) {
+      .timeline-detail-content .detail-list { grid-template-columns: 1fr 1fr; }
+    }
+    </style>
+    
+    <div class="detail-section">
+      <div class="detail-title">Rincian Tugas Utama</div>
+      <ul class="detail-list">
+        <li>Melakukan pemeliharaan arsip yang terorganisir dengan baik, serta pencatatan perpindahan atau penghapusan dokumen sesuai dengan kebijakan dan prosedur yang telah ditetapkan.</li>
+        <li>Mengidentifikasi dan mengategorikan dokumen berdasarkan prioritas untuk memudahkan pemantauan dan memastikan akses yang cepat saat dokumen kembali dibutuhkan.</li>
+        <li>Melakukan audit dan pemeriksaan rutin untuk memastikan dokumen lengkap, akurat, dan diperbarui sesuai dengan perubahan regulasi atau kebijakan.</li>
+      </ul>
+    </div>

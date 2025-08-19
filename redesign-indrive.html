@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redesign Journey InDrive App | Mohammad Reyhan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-start: #2AF598;
+            --accent-end: #009EFD;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Portfolio Detail Header */
+        .pf-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pf-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .pf-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .pf-close:hover {
+            background: rgba(0, 158, 253, 0.25);
+            border-color: var(--accent-end);
+            transform: scale(1.05) rotate(90deg);
+            box-shadow: 0 0 20px rgba(0, 158, 253, 0.3);
+        }
+
+        /* Portfolio Detail Grid */
+        .pf-detail-grid {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 992px) {
+            .pf-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add this block to match index.html container responsiveness */
+        @media (max-width: 992px) {
+            .container {
+            width: 95%;
+            }
+        }
+
+        /* Slider */
+        .pf-hero {
+            position: relative;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 1.5rem;
+        }
+
+        .pf-track {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .pf-slides {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .pf-slide {
+            min-width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #0e0e0e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .pf-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .pf-slide:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Navigation arrows */
+        .pf-nav {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: none;
+            padding: 0 20px;
+        }
+
+        .pf-arrow {
+            pointer-events: auto;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .pf-arrow:hover {
+            background: rgba(0, 158, 253, 0.3);
+            border-color: var(--accent-end);
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 158, 253, 0.4);
+        }
+
+        /* Dots */
+        .pf-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .pf-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pf-dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.2);
+        }
+
+        .pf-dot.active {
+            width: 30px;
+            background: var(--accent-end);
+            border-radius: 5px;
+        }
+
+        /* Portfolio Detail Content */
+        .pf-detail-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+        }
+
+        .pf-detail-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .pf-detail-content h3 i {
+            color: var(--accent-end);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pf-detail-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Meta Cards */
+        .meta-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .meta-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 158, 253, 0.2);
+            /* box-shadow: 0 20px 45px rgba(0, 158, 253, 0.15); */
+        }
+
+        .meta-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .meta-card h4 i {
+            color: var(--accent-end);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .meta-card:hover h4 i {
+            transform: scale(1.2);
+        }
+
+        .meta-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .tools-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding: 0.7rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            background: rgba(0, 158, 253, 0.12);
+            transform: translateX(5px);
+        }
+
+        .tool-item i {
+            color: var(--accent-end);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .tool-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--accent-end);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.9rem 1.8rem;
+            background: rgba(0, 158, 253, 0.12);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .project-link:hover {
+            background: rgba(0, 158, 253, 0.2);
+            color: var(--accent-start);
+            transform: translateY(-3px);
+            /* box-shadow: 0 8px 20px rgba(0, 158, 253, 0.25); */
+        }
+
+        .project-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .pf-detail-grid {
+                gap: 1.8rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .pf-title {
+                font-size: 2rem;
+            }
+            
+            .pf-arrow {
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+            
+            .pf-detail-content {
+                padding: 1.8rem;
+            }
+            
+            .meta-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pf-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.2rem;
+                margin-bottom: 1.8rem;
+            }
+            
+            .pf-title {
+                font-size: 1.8rem;
+            }
+            
+            .pf-close {
+                align-self: flex-end;
+            }
+            
+            .pf-detail-grid {
+                gap: 1.5rem;
+            }
+            
+            .pf-detail-content {
+                padding: 1.5rem;
+            }
+            
+            .meta-card {
+                padding: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .pf-title {
+                font-size: 1.6rem;
+            }
+            
+            .pf-close {
+                width: 38px;
+                height: 38px;
+                font-size: 20px;
+            }
+            
+            .pf-arrow {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+            
+            .pf-nav {
+                padding: 0 12px;
+            }
+            
+            .pf-detail-content h3 {
+                font-size: 1.2rem;
+            }
+            
+            .pf-detail-content p {
+                font-size: 0.98rem;
+            }
+        }
+
+        /* Responsive khusus untuk mobile kecil (480px) */
+        @media (max-width: 480px) {
+            .pf-head {
+                position: relative;
+                padding: 0;
+                border-bottom: none;
+                margin-bottom: 1.5rem;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+            
+            .pf-title {
+                font-size: 1.4rem;
+                line-height: 1.4;
+                max-width: calc(100% - 50px); /* Memastikan judul tidak menutupi tombol */
+            }
+            
+            .pf-close {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 10;
+                margin: 0;
+                flex-shrink: 0;
+            }
+            
+            .pf-hero {
+                border-radius: 12px;
+                margin-bottom: 1rem;
+            }
+            
+            .pf-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            
+            .pf-nav {
+                padding: 0 8px;
+            }
+            
+            .pf-dots {
+                bottom: 10px;
+            }
+            
+            .pf-dot {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .pf-dot.active {
+                width: 25px;
+            }
+            
+            .pf-detail-grid {
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .pf-detail-content {
+                padding: 1.2rem;
+                border-radius: 12px;
+            }
+            
+            .meta-card {
+                padding: 1.1rem;
+                border-radius: 12px;
+            }
+            
+            .pf-detail-content h3,
+            .meta-card h4 {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .pf-detail-content p,
+            .meta-card p {
+                font-size: 0.92rem;
+                line-height: 1.7;
+            }
+            
+            .tool-item {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .project-link {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.8rem;
+            }
+        }
+
+        /* Fallback untuk browser tanpa aspect-ratio */
+        @supports not (aspect-ratio: 1 / 1) {
+            .pf-slide {
+                position: relative;
+                padding-top: 56.25%; /* 16:9 */
+            }
+            
+            .pf-slide > img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pf-head">
+            <h2 class="pf-title">Redesign Journey InDrive App</h2>
+            <a href="#" class="pf-close" aria-label="Tutup detail" data-action="back-portfolio">×</a>
+        </div>
+
+        <!-- Portfolio Detail Grid -->
+        <div class="pf-detail-grid">
+            <!-- Kolom Kiri (70%) -->
+            <div class="pf-left-column">
+                <!-- Slider Gambar -->
+                <div class="pf-hero">
+                    <div class="pf-track">
+                        <div class="pf-slides">
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide5.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide6.JPG" alt="InDrive App Screenshot 2">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide8.JPG" alt="InDrive App Screenshot 3">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide11.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide13.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide15.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide17.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide21.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide22.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide28.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide30.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide33.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide35.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide39.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide40.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide41.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide42.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide50.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                            <div class="pf-slide">
+                                <img src="assets/images/image-uiux/Slide62.JPG" alt="InDrive App Screenshot 1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pf-nav">
+                        <button class="pf-arrow" aria-label="Prev" data-action="pf-prev">‹</button>
+                        <button class="pf-arrow" aria-label="Next" data-action="pf-next">›</button>
+                    </div>
+                    <div class="pf-dots"></div>
+                </div>
+
+                <!-- Deskripsi Proyek -->
+                <div class="pf-detail-content">
+                    <h3><i class="fas fa-info-circle"></i> Deskripsi Proyek</h3>
+                    <p>
+                        Proyek ini merupakan redesign aplikasi inDrive, sebuah platform ride-hailing internasional. Berdasarkan riset melalui wawancara pengguna dan analisis aplikasi, ditemukan tiga masalah utama: belum tersedianya metode pembayaran cashless, proses input alamat yang berulang saat berpindah layanan, serta tampilan daftar driver yang tidak sesuai urutan harga maupun jarak.
+                    </p>
+                    <br>
+                    <p>
+                        Menggunakan pendekatan Design Thinking, tim merumuskan solusi melalui user journey mapping, ideasi dengan Crazy 8, hingga pembuatan wireframe dan high-fidelity prototype. Hasil redesign menghadirkan fitur pembayaran e-wallet, alamat tersimpan, serta penyusunan ulang driver berdasarkan jarak terdekat dan harga termurah, disertai penyederhanaan kategori layanan agar lebih intuitif.
+                    </p>
+                    <br>
+                    <p>
+                        Melalui usability testing, mayoritas pengguna dapat menyelesaikan alur pemesanan dengan lebih cepat dan nyaman dibandingkan versi sebelumnya. Proyek ini menunjukkan bagaimana riset dan iterasi desain dapat meningkatkan pengalaman pengguna secara nyata.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Kolom Kanan (30%) -->
+            <div class="pf-right-column">
+                <!-- Tanggal Pengerjaan -->
+                <div class="meta-card">
+                    <h4><i class="fas fa-calendar-alt"></i> Waktu Pengerjaan</h4>
+                    <p>September 2023 — Oktober 2023</p>
+                </div>
+
+                <!-- Tools -->
+                <div class="meta-card">
+                    <h4><i class="fas fa-tools"></i> Tools</h4>
+                    <div class="tools-list">
+                        <div class="tool-item">
+                            <i class="fab fa-figma"></i>
+                            <span>Figma</span>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-chalkboard"></i>
+                            <span>FigJam</span>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Maze App</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link Proyek -->
+                <div class="meta-card">
+                    <h4><i class="fas fa-external-link-alt"></i> Link Pendukung</h4>
+                    <p>Lihat slide lengkap dan Prototipe:</p>
+                    <a href="https://drive.google.com/file/d/1MZozeHxO-jrQeayQgWHGLYhbAjex6P-L/view?usp=sharing" class="project-link" target="_blank" rel="noopener">
+                        <span>Slide 62 Halaman</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="https://www.figma.com/proto/rJFXN8ohFbdn2TZSmjvvPv/Finpro-Kel.-10C-Batch-10--InDrive-?node-id=202-5898&t=tTLaJifdIgZT9t12-1&scaling=scale-down&content-scaling=fixed&page-id=202%3A5879&starting-point-node-id=202%3A7002" class="project-link" target="_blank" rel="noopener">
+                        <span>Lihat Prototipe</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

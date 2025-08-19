@@ -1,0 +1,51 @@
+<style>
+/* Scoped agar hanya berlaku di area detail timeline */
+.timeline-detail-content .detail-section { margin-top: 4px; }
+
+.timeline-detail-content .detail-title {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: .2px;
+}
+.timeline-detail-content .detail-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+/* List rapi + jarak nyaman; tetap pakai bullet aksen dari CSS global */
+.timeline-detail-content .detail-list {
+  list-style: none;
+  padding-left: 15px;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.timeline-detail-content .detail-list li {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* 2 kolom di layar lebar */
+@media (min-width: 900px) {
+  .timeline-detail-content .detail-list { grid-template-columns: 1fr 1fr; }
+}
+</style>
+
+<div class="detail-section">
+  <div class="detail-title">Rincian Tanggung Jawab</div>
+  <ul class="detail-list">
+    <li>Memimpin dan mengarahkan anggota divisi kaderisasi dalam kegiatan pengembangan anggota.</li>
+    <li>Melakukan evaluasi rutin terhadap efektivitas program promosi dan mengidentifikasi peluang untuk peningkatan atau perbaikan yang diperlukan.</li>
+    <li>Merancang strategi promosi yang menarik untuk mencapai hasil optimal dalam mempromosikan organisasi, termasuk penggunaan media sosial, dan kampanye digital.</li>
+  </ul>
+</div>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Berita PT. Riau Media Televisi | Mohammad Reyhan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-start: #2AF598;
+            --accent-end: #009EFD;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Portfolio Detail Header */
+        .pf-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pf-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .pf-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .pf-close:hover {
+            background: rgba(0, 158, 253, 0.25);
+            border-color: var(--accent-end);
+            transform: scale(1.05) rotate(90deg);
+            box-shadow: 0 0 20px rgba(0, 158, 253, 0.3);
+        }
+
+        /* Portfolio Detail Grid */
+        .pf-detail-grid {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 992px) {
+            .pf-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add this block to match index.html container responsiveness */
+        @media (max-width: 992px) {
+            .container {
+                width: 95%;
+            }
+        }
+
+        /* Image Grid */
+        .image-grid {
+            columns: 2; /* Menggunakan CSS Columns untuk masonry */
+            column-gap: 1.5rem; /* Jarak antar kolom */
+            margin-bottom: 1.5rem;
+        }
+
+        .image-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--bg-card);
+            /* aspect-ratio: 1/1; */ /* Dihapus untuk menyesuaikan tinggi gambar asli */
+            margin-bottom: 1.5rem; /* Tambahkan margin bawah untuk setiap item */
+            break-inside: avoid; /* Penting untuk masonry agar item tidak terpotong */
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto; /* Tinggi menyesuaikan gambar asli */
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+            display: block; /* Penting untuk menghilangkan spasi bawah gambar */
+        }
+
+        .image-item:hover {
+            transform: translateY(-8px);
+            /* box-shadow: 0 15px 35px rgba(0, 158, 253, 0.2); */
+        }
+
+        /* .image-item:hover img {
+            transform: scale(1.05);
+        } */
+
+        .image-caption {
+            position: absolute;
+            bottom: 0.8rem; /* Jarak dari bawah lebih dekat */
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            max-width: 70%; /* Lebar maksimal lebih kecil */
+            padding: 0.4rem 0.8rem; /* Padding yang sangat kecil */
+            background: rgba(0, 0, 0, 0.75); /* Background sedikit lebih transparan */
+            color: white;
+            font-size: 0.75rem; /* Font size yang sangat kecil */
+            font-weight: 400; /* Font weight normal */
+            opacity: 1;
+            border-radius: 15px; /* Border radius lebih kecil */
+            text-align: center;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); /* Shadow lebih halus */
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Border lebih tipis */
+        }
+
+        /* .image-item:hover .image-caption {
+            opacity: 1;
+            transform: translateY(0);
+        } */
+
+        /* Portfolio Detail Content */
+        .pf-detail-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+        }
+
+        .pf-detail-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .pf-detail-content h3 i {
+            color: var(--accent-end);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .pf-detail-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Meta Cards */
+        .meta-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .meta-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 158, 253, 0.2);
+            /* box-shadow: 0 20px 45px rgba(0, 158, 253, 0.15); */
+        }
+
+        .meta-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .meta-card h4 i {
+            color: var(--accent-end);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .meta-card:hover h4 i {
+            transform: scale(1.2);
+        }
+
+        .meta-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .tools-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding: 0.7rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            background: rgba(0, 158, 253, 0.12);
+            transform: translateX(5px);
+        }
+
+        .tool-item i {
+            color: var(--accent-end);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .tool-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--accent-end);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.9rem 1.8rem;
+            background: rgba(0, 158, 253, 0.12);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .project-link:hover {
+            background: rgba(0, 158, 253, 0.2);
+            color: var(--accent-start);
+            transform: translateY(-3px);
+            /* box-shadow: 0 8px 20px rgba(0, 158, 253, 0.25); */
+        }
+
+        .project-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Project Description */
+        .project-description {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-top: 1.5rem;
+            grid-column: 1 / -1;
+        }
+
+        .project-description h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.8rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(0, 158, 253, 0.3);
+        }
+
+        .project-description h3 i {
+            color: var(--accent-end);
+            font-size: 1.3rem;
+        }
+
+        .project-description p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-feature {
+            background: rgba(0, 158, 253, 0.1);
+            border-left: 3px solid var(--accent-end);
+            padding: 1.2rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .pf-detail-grid {
+                gap: 1.8rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .pf-detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-grid {
+                columns: 2;
+            }
+            
+            .pf-title {
+                font-size: 2rem;
+            }
+            
+            .pf-detail-content {
+                padding: 1.8rem;
+            }
+            
+            .meta-card {
+                padding: 1.5rem;
+            }
+            
+            .project-description {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pf-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.2rem;
+                margin-bottom: 1.8rem;
+            }
+            
+            .pf-title {
+                font-size: 1.8rem;
+            }
+            
+            .pf-close {
+                align-self: flex-end;
+            }
+            
+            .image-grid {
+                columns: 1;
+            }
+            
+            .pf-detail-content {
+                padding: 1.5rem;
+            }
+            
+            .meta-card {
+                padding: 1.3rem;
+            }
+            
+            .project-description {
+                padding: 1.8rem;
+            }
+            
+            .pf-detail-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .pf-title {
+                font-size: 1.6rem;
+            }
+            
+            .pf-close {
+                width: 38px;
+                height: 38px;
+                font-size: 20px;
+            }
+            
+            .pf-detail-content h3 {
+                font-size: 1.2rem;
+            }
+            
+            .pf-detail-content p {
+                font-size: 0.98rem;
+            }
+            
+            .project-description {
+                padding: 1.5rem;
+            }
+            
+            .project-description h3 {
+                font-size: 1.2rem;
+            }
+            
+            .project-description p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Responsive khusus untuk mobile kecil (480px) */
+        @media (max-width: 480px) {
+            .pf-head {
+                position: relative;
+                padding: 0;
+                border-bottom: none;
+                margin-bottom: 1.5rem;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+            
+            .pf-title {
+                font-size: 1.4rem;
+                line-height: 1.4;
+                max-width: calc(100% - 50px); /* Memastikan judul tidak menutupi tombol */
+            }
+            
+            .pf-close {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 10;
+                margin: 0;
+                flex-shrink: 0;
+            }
+            
+            .pf-detail-grid {
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .image-grid {
+                column-gap: 1rem;
+            }
+            
+            .image-item {
+                margin-bottom: 1rem;
+                border-radius: 10px;
+            }
+            
+            .image-caption {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+                bottom: 0.5rem;
+                max-width: 90%;
+            }
+            
+            .pf-detail-content {
+                padding: 1.2rem;
+                border-radius: 12px;
+                margin-bottom: 1rem;
+            }
+            
+            .meta-card {
+                padding: 1.1rem;
+                border-radius: 12px;
+                margin-bottom: 1rem;
+            }
+            
+            .project-description {
+                padding: 1.5rem 1.2rem;
+                border-radius: 12px;
+                margin-top: 1rem;
+            }
+            
+            .pf-detail-content h3,
+            .meta-card h4,
+            .project-description h3 {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .pf-detail-content p,
+            .meta-card p,
+            .project-description p {
+                font-size: 0.92rem;
+                line-height: 1.7;
+            }
+            
+            .tool-item {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .project-link {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.8rem;
+            }
+            
+            .highlight-feature {
+                padding: 0.9rem;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pf-head">
+            <h2 class="pf-title">Admin FYP Media Jakarta</h2>
+            <a href="#" class="pf-close" aria-label="Tutup detail" data-action="back-portfolio">×</a>
+        </div>
+
+        <!-- Portfolio Detail Grid -->
+        <div class="pf-detail-grid">
+            <!-- Kolom Kiri (70%) -->
+            <div class="pf-left-column">
+                <!-- Grid Gambar -->
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="assets/images/image-admin/admin1.jpeg" alt="Portal Berita Screenshot 1">
+                        <div class="image-caption">Feed Editing</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="assets/images/image-admin/admin2.png" alt="Portal Berita Screenshot 1">
+                        <div class="image-caption">Content Plan</div>
+                    </div>
+                    <!-- <div class="image-item">
+                        <img src="assets/images/image-admin/admin3.jpeg" alt="Portal Berita Screenshot 1">
+                        <div class="image-caption">Feed Editing</div>
+                    </div> -->
+                    <div class="image-item">
+                        <img src="assets/images/image-admin/admin4.png" alt="Portal Berita Screenshot 1">
+                        <div class="image-caption">Socmed Report</div>
+                    </div>
+                    <!-- <div class="image-item">
+                        <img src="assets/images/image-admin/admin6.jpeg" alt="Portal Berita Screenshot 1">
+                        <div class="image-caption">Halaman Beranda</div>
+                    </div> -->
+                    <div class="image-item">
+                        <img src="assets/images/image-admin/admin8.jpeg" alt="Portal Berita Screenshot 1">
+                        <div class="image-caption">Certificate FYP</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="assets/images/image-admin/admin9.jpeg" alt="Portal Berita Screenshot 1">
+                        <div class="image-caption">Best Province</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kolom Kanan (30%) -->
+            <div class="pf-right-column">
+                <!-- Tanggal Pengerjaan -->
+                <div class="meta-card">
+                    <h4><i class="fas fa-calendar-alt"></i> Periode Kegiatan</h4>
+                    <p>April 2024 — Desember 2024</p>
+                </div>
+
+                <!-- Tools -->
+                <div class="meta-card">
+                    <h4><i class="fas fa-tools"></i>Teknologi & Tools</h4>
+                    <div class="tools-list">
+                        <div class="tool-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Instagram Insight</span>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-video"></i>
+                            <span>Capcut</span>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Canva</span>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fab fa-google"></i>
+                            <span>Google Workspace</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link Proyek -->
+                <div class="meta-card">
+                    <h4><i class="fas fa-external-link-alt"></i> Link Pendukung</h4>
+                    <p>Tentang Agensi FYP Media</p>
+                    <a href="https://drive.google.com/file/d/1OCgwQgLL1tsP-qdyjPBF7vPU3KZjya21/view?usp=sharing" class="project-link" target="_blank" rel="noopener">
+                        <span>Deck FYP</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deskripsi Proyek -->
+        <div class="project-description">
+            <h3><i class="fas fa-info-circle"></i>Tentang Peran</h3>
+            <p>
+                Sebagai Social Media and Creative di FYP Media Jakarta, saya berperan dalam merencanakan dan menyusun strategi content plan yang relevan untuk akun Instagram @fypmediajkt. Selain itu, saya juga bertanggung jawab menyusun jadwal konten agar posting dilakukan tepat waktu sehingga dapat menjangkau audiens yang lebih luas serta meningkatkan engagement.
+            </p>
+            
+            <!-- <div class="highlight-feature">
+                <p>
+                    Berdasarkan analisis tersebut, saya merancang ulang website dengan pendekatan modern melalui prototype berbasis HTML, CSS, JavaScript, dan PHP. Fokus pengembangan ada pada peningkatan tampilan antarmuka, kemudahan navigasi, serta penyempurnaan fitur agar pengalaman pengguna menjadi lebih baik.
+                </p>
+            </div> -->
+            
+            <p>
+            </p>
+            <p>
+                Dalam peran ini, saya sekaligus menjadi admin Instagram dengan aktif mengelola komunitas, merespons komentar, pesan langsung, maupun mention dari pengikut. Saya juga secara rutin menyampaikan laporan kepada kepala divisi yang disertai analisis dan rekomendasi untuk strategi konten ke depan.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
