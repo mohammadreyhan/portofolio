@@ -698,5 +698,46 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Slider functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.pf-track');
+            const slides = document.querySelectorAll('.pf-slide');
+            const prev = document.querySelector('[data-action="pf-prev"]');
+            const next = document.querySelector('[data-action="pf-next"]');
+            const dotsWrap = document.querySelector('.pf-dots');
+            
+            if (!track || !slides.length) return;
+
+            let idx = 0;
+            
+            function show(i) {
+                idx = (i + slides.length) % slides.length;
+                track.querySelector('.pf-slides').style.transform = `translateX(-${idx * 100}%)`;
+                document.querySelectorAll('.pf-dot').forEach((d, k) => d.classList.toggle('active', k === idx));
+            }
+
+            // Create dots
+            slides.forEach((_, i) => {
+                const b = document.createElement('button');
+                b.className = 'pf-dot' + (i === 0 ? ' active' : '');
+                b.addEventListener('click', () => show(i));
+                dotsWrap && dotsWrap.appendChild(b);
+            });
+
+            prev && prev.addEventListener('click', () => show(idx - 1));
+            next && next.addEventListener('click', () => show(idx + 1));
+            show(0);
+            
+            // Close button functionality
+            const closeBtn = document.querySelector('.pf-close');
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // In a real implementation, this would navigate back to the portfolio list
+                alert('Fungsi kembali ke portofolio utama diimplementasikan di sini');
+            });
+        });
+    </script>
 </body>
 </html>

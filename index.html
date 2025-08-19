@@ -1224,6 +1224,7 @@
             opacity: 1;
             transition: opacity 0.5s ease-in-out;
             font-size: 0.9em;
+            opacity: 0; /* Mulai dengan opacity 0 untuk fade-in */
         }
 
         .scroll-down-icon {
@@ -1524,26 +1525,59 @@
             justify-content: center; /* Center content horizontally */
             align-items: center; /* Center content vertically */
             backdrop-filter: blur(5px); /* Tambahkan efek buram */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: rgba(255,255,255,0.35) rgba(255,255,255,0.08); /* thumb track */
+        }
+        .activity-detail-popup::-webkit-scrollbar {
+          width: 10px;
+        }
+        .activity-detail-popup::-webkit-scrollbar-track {
+          background: rgba(255,255,255,0.08);
+          border-radius: 8px;
+        }
+        .activity-detail-popup::-webkit-scrollbar-thumb {
+          background: rgba(255,255,255,0.35);
+          border-radius: 8px;
+        }
+        .activity-detail-popup::-webkit-scrollbar-thumb:hover {
+          background: rgba(255,255,255,0.5);
         }
 
         .activity-detail-popup .popup-content {
-            background-color: var(--bg-card); /* Ubah dari #fefefe ke dark theme */
+            background: var(--bg-card);
             margin: auto;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            width: 90%; /* Responsive width */
-            max-width: 900px; /* Max width for larger screens */
+            width: 90%;
+            max-width: 900px;
             position: relative;
             box-sizing: border-box;
-            max-height: 90vh; /* Max height to prevent content overflow */
-            overflow-y: auto; /* Enable vertical scroll if content is too long */
-            border: 1px solid rgba(255, 255, 255, 0.12); /* Tambahkan border subtle */
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-primary); /* Menjamin warna teks */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: rgba(255,255,255,0.35) rgba(255,255,255,0.08); /* thumb track */
+        }
+        .activity-detail-popup .popup-content::-webkit-scrollbar {
+          width: 10px;
+        }
+        .activity-detail-popup .popup-content::-webkit-scrollbar-track {
+          background: rgba(255,255,255,0.08);
+          border-radius: 8px;
+        }
+        .activity-detail-popup .popup-content::-webkit-scrollbar-thumb {
+          background: rgba(255,255,255,0.35);
+          border-radius: 8px;
+        }
+        .activity-detail-popup .popup-content::-webkit-scrollbar-thumb:hover {
+          background: rgba(255,255,255,0.5);
         }
 
         .activity-detail-popup .close-popup-btn {
-            color: var(--text-primary); /* Ubah dari #aaa ke dark theme */
-            float: right;
+            color: var(--text-primary);
+            float: right; /* Mungkin perlu disesuaikan jika flexbox digunakan */
             font-size: 28px;
             font-weight: bold;
             position: absolute;
@@ -1554,165 +1588,150 @@
 
         .activity-detail-popup .close-popup-btn:hover,
         .activity-detail-popup .close-popup-btn:focus {
-            color: var(--accent-end); /* Ubah dari #333 ke accent color */
+            color: var(--accent-end);
             text-decoration: none;
             cursor: pointer;
         }
 
-        /* Dark theme overrides untuk konten popup */
-        .activity-detail-popup .popup-content-detail {
-            color: var(--text-primary);
-        }
-
-        .activity-detail-popup .popup-details {
-            border-left: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .activity-detail-popup .popup-details h3 {
-            color: var(--text-primary);
-        }
-
-        .activity-detail-popup .popup-details p {
-            color: var(--text-secondary);
-        }
-
-        .activity-detail-popup .popup-details p strong {
-            color: var(--text-primary);
-        }
-
-        .activity-detail-popup .popup-image-grid img {
-            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
-        }
-
-        /* Popup overlay */
-        .activity-detail-popup {
-          display: none;
-          position: fixed;
-          z-index: 1000;
-          left: 0; top: 0;
-          width: 100%; height: 100%;
-          overflow: auto;
-          background-color: rgba(0,0,0,0.7);
-          justify-content: center;
-          align-items: center;
-          backdrop-filter: blur(5px);
-        }
-
-        /* Popup content: pakai dark theme */
-        .activity-detail-popup .popup-content {
-          background: var(--bg-card) !important;   /* dari #fefefe → gelap */
-          color: var(--text-primary) !important;
-          border: 1px solid rgba(255,255,255,0.12) !important;
-        }
-
-        /* Force warna konten file AJAX agar tidak balik ke light */
-        .activity-detail-popup .popup-content-detail { color: var(--text-primary) !important; }
-        .activity-detail-popup .popup-details { border-left: 1px solid rgba(255,255,255,0.12) !important; }
+        /* Styles for content loaded via AJAX, ensuring dark theme consistency */
+        .activity-detail-popup .popup-content-detail { color: var(--text-primary); }
+        .activity-detail-popup .popup-details { border-left: 1px solid rgba(255,255,255,0.12); }
         @media (max-width: 768px) {
           .activity-detail-popup .popup-details {
-            border-left: none !important;
-            border-top: 1px solid rgba(255,255,255,0.12) !important;
+            border-left: none;
+            border-top: 1px solid rgba(255,255,255,0.12);
           }
         }
-        .activity-detail-popup .popup-details h3 { color: var(--text-primary) !important; }
-        .activity-detail-popup .popup-details p  { color: var(--text-secondary) !important; }
-        .activity-detail-popup .popup-details p strong { color: var(--text-primary) !important; }
+        .activity-detail-popup .popup-details h3 { color: var(--text-primary); }
+        .activity-detail-popup .popup-details p  { color: var(--text-secondary); }
+        .activity-detail-popup .popup-details p strong { color: var(--text-primary); }
 
-        /* Tombol close dark */
-        .activity-detail-popup .close-popup-btn { color: var(--text-primary) !important; }
-        .activity-detail-popup .close-popup-btn:hover,
-        .activity-detail-popup .close-popup-btn:focus { color: var(--accent-end) !important; }
-
-        /* Scrollbar dark (Firefox + WebKit) */
-        .activity-detail-popup,
-        .activity-detail-popup .popup-content {
-          scrollbar-width: thin; /* Firefox */
-          scrollbar-color: rgba(255,255,255,0.35) rgba(255,255,255,0.08); /* thumb track */
-        }
-        .activity-detail-popup::-webkit-scrollbar,
-        .activity-detail-popup .popup-content::-webkit-scrollbar {
-          width: 10px;
-        }
-        .activity-detail-popup::-webkit-scrollbar-track,
-        .activity-detail-popup .popup-content::-webkit-scrollbar-track {
-          background: rgba(255,255,255,0.08);
-          border-radius: 8px;
-        }
-        .activity-detail-popup::-webkit-scrollbar-thumb,
-        .activity-detail-popup .popup-content::-webkit-scrollbar-thumb {
-          background: rgba(255,255,255,0.35);
-          border-radius: 8px;
-        }
-        .activity-detail-popup::-webkit-scrollbar-thumb:hover,
-        .activity-detail-popup .popup-content::-webkit-scrollbar-thumb:hover {
-          background: rgba(255,255,255,0.5);
-        }
-
-        /* Scroll-down awalnya tersembunyi agar bisa fade-in saat load */
-        .scroll-down {
-          opacity: 0;                     /* ubah dari 1 ke 0 */
-          transition: opacity 2s ease-in-out; /* sudah ada, boleh dipertahankan */
-        }
-
-        /* Styles for "Read More" button in timeline */
-        .read-more-btn {
-            display: inline-flex;
+        /* Certificate Image Popup */
+        .certificate-popup {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
             align-items: center;
-            margin-top: 10px;
-            color: var(--accent-end);
-            text-decoration: none;
-            font-weight: 500;
-            gap: 5px;
+            backdrop-filter: blur(5px);
+        }
+
+        .certificate-popup-content {
+            background-color: transparent;
+            margin: auto;
+            padding: 35px;
+            border-radius: 10px;
+            position: relative;
+            box-sizing: border-box;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .certificate-popup-content img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .close-certificate-popup-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
+            z-index: 1001;
         }
 
-        .read-more-btn:hover {
-            color: var(--accent-start);
-            gap: 8px;
+        .close-certificate-popup-btn:hover {
+            background: rgba(0,0,0,0.9);
+            border-color: rgba(255,255,255,0.6);
+            transform: scale(1.1);
         }
 
-        .read-more-btn i {
-            transition: transform 0.3s ease;
+        /* Back to Top Button */
+        .back-to-top-btn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed position */
+            bottom: 30px; /* 30px from the bottom */
+            right: 30px; /* 30px from the right */
+            z-index: 1000; /* High z-index to be on top */
+            background: rgba(30, 30, 30, 0.7); /* Ubah ke warna latar belakang gelap semi-transparan */
+            backdrop-filter: blur(5px); /* Tambahkan efek blur untuk kesan modern */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Border subtle */
+            color: var(--text-primary); /* Warna ikon tetap putih/primary text */
+            border-radius: 50%; /* Circular shape */
+            width: 50px; /* Width */
+            height: 50px; /* Height */
+            font-size: 1.2rem; /* Icon size */
+            cursor: pointer; /* Pointer cursor on hover */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Bayangan lebih lembut */
+            transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Transisi untuk semua properti */
+            opacity: 0; /* Start with opacity 0 for fade in */
+            transform: translateY(20px); /* Start slightly below for slide up */
+            display: flex; /* Use flexbox for centering content */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
         }
 
-        .read-more-btn:hover i {
-            transform: translateX(3px);
+        .back-to-top-btn.show {
+            opacity: 1; /* Fade in */
+            transform: translateY(0);
         }
 
-        .timeline-detail-content {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .back-to-top-btn:hover {
+            background: rgba(40, 40, 40, 0.85); /* Sedikit lebih gelap saat hover */
+            border-color: rgba(255, 255, 255, 0.2); /* Border sedikit lebih terlihat saat hover */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); /* Bayangan sedikit lebih kuat saat hover */
+            transform: translateY(-5px); /* Lift slightly on hover */
         }
 
-        .timeline-detail-content ul {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
+        @media (max-width: 576px) {
+            .back-to-top-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
         }
 
-        .timeline-detail-content ul li {
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .timeline-detail-content ul li:before {
-            content: "\2022"; /* Bullet point */
-            color: var(--accent-end);
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-            opacity: 0; /* Mulai dengan opacity 0 */
-            transform: scale(0.5); /* Mulai dengan skala kecil */
-            transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1), transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Animasi untuk bullet point saat konten dimuat */
-        .timeline-detail-content ul li.animate-bullet:before {
-            opacity: 1;
-            transform: scale(1);
+        /* Fallback untuk browser yang tidak mendukung aspect-ratio */
+        @supports not (aspect-ratio: 1 / 1) {
+          .project-img { position: relative; }
+          .project-img::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%; /* 16:9 */
+          }
+          .project-img > img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         }
 
         .form-group textarea {
@@ -1930,132 +1949,65 @@
         }
         /* --- END Portfolio Detail Specific Styles --- */
 
-        /* Certificate Image Popup */
-        .certificate-popup {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            justify-content: center;
+        /* Styles for "Read More" button in timeline */
+        .read-more-btn {
+            display: inline-flex;
             align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .certificate-popup-content {
-            background-color: transparent;
-            margin: auto;
-            padding: 35px;
-            border-radius: 10px;
-            position: relative;
-            box-sizing: border-box;
-            max-width: 90vw;
-            max-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .certificate-popup-content img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .close-certificate-popup-btn {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.8);
-            color: #fff;
-            font-size: 24px;
-            font-weight: bold;
-            border: 2px solid rgba(255,255,255,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            margin-top: 10px;
+            color: var(--accent-end);
+            text-decoration: none;
+            font-weight: 500;
+            gap: 5px;
             transition: all 0.3s ease;
-            z-index: 1001;
+            font-size: 0.9rem;
         }
 
-        .close-certificate-popup-btn:hover {
-            background: rgba(0,0,0,0.9);
-            border-color: rgba(255,255,255,0.6);
-            transform: scale(1.1);
+        .read-more-btn:hover {
+            color: var(--accent-start);
+            gap: 8px;
         }
 
-        /* Back to Top Button */
-        .back-to-top-btn {
-            display: none; /* Hidden by default */
-            position: fixed; /* Fixed position */
-            bottom: 30px; /* 30px from the bottom */
-            right: 30px; /* 30px from the right */
-            z-index: 1000; /* High z-index to be on top */
-            background: rgba(30, 30, 30, 0.7); /* Ubah ke warna latar belakang gelap semi-transparan */
-            backdrop-filter: blur(5px); /* Tambahkan efek blur untuk kesan modern */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Border subtle */
-            color: var(--text-primary); /* Warna ikon tetap putih/primary text */
-            border-radius: 50%; /* Circular shape */
-            width: 50px; /* Width */
-            height: 50px; /* Height */
-            font-size: 1.2rem; /* Icon size */
-            cursor: pointer; /* Pointer cursor on hover */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Bayangan lebih lembut */
-            transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Transisi untuk semua properti */
-            opacity: 0; /* Start with opacity 0 for fade in */
-            transform: translateY(20px); /* Start slightly below for slide up */
-            display: flex; /* Use flexbox for centering content */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
+        .read-more-btn i {
+            transition: transform 0.3s ease;
         }
 
-        .back-to-top-btn.show {
-            opacity: 1; /* Fade in */
-            transform: translateY(0);
+        .read-more-btn:hover i {
+            transform: translateX(3px);
         }
 
-        .back-to-top-btn:hover {
-            background: rgba(40, 40, 40, 0.85); /* Sedikit lebih gelap saat hover */
-            border-color: rgba(255, 255, 255, 0.2); /* Border sedikit lebih terlihat saat hover */
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); /* Bayangan sedikit lebih kuat saat hover */
-            transform: translateY(-5px); /* Lift slightly on hover */
+        .timeline-detail-content {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @media (max-width: 576px) {
-            .back-to-top-btn {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
-            }
+        .timeline-detail-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
         }
 
-        /* Fallback untuk browser yang tidak mendukung aspect-ratio */
-        @supports not (aspect-ratio: 1 / 1) {
-          .project-img { position: relative; }
-          .project-img::before {
-            content: "";
-            display: block;
-            padding-top: 56.25%; /* 16:9 */
-          }
-          .project-img > img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
+        .timeline-detail-content ul li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .timeline-detail-content ul li:before {
+            content: "\2022"; /* Bullet point */
+            color: var(--accent-end);
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            opacity: 0; /* Mulai dengan opacity 0 */
+            transform: scale(0.5); /* Mulai dengan skala kecil */
+            transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1), transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Animasi untuk bullet point saat konten dimuat */
+        .timeline-detail-content ul li.animate-bullet:before {
+            opacity: 1;
+            transform: scale(1);
         }
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -2138,7 +2090,7 @@
         </div>
         <div class="scroll-down">
             <div class="scroll-down-icon"></div>
-            <p>Scroll untuk melihat lebih lainyaaaa</p>
+            <p>Scroll untuk melihat lebih banyak</p>
         </div>
     </section>
 
@@ -2386,7 +2338,7 @@
                     <div class="portfolio-col">
                         <h3>UI/UX Case Study</h3>
                         <div class="project-item">
-                            <img src="assets/images/image-uiux/Slide1.JPG" alt="UI Design" class="project-img">
+                            <img src="assets/images/image-uiux/Slide1.jpg" alt="UI Design" class="project-img">
                             <div class="project-info">
                                 <h4>Redesign Journey InDrive App</h4>
                                 <p>Proyek ini merupakan redesign aplikasi inDrive, sebuah platform ride-hailing internasional. Berdasarkan riset melalui wawancara pengguna dan analisis aplikasi, ditemukan tiga masalah utama: belum tersedianya metode pembayaran cashless, proses input alamat yang berulang saat berpindah layanan, serta tampilan daftar driver yang tidak sesuai urutan harga maupun jarak.</p>
@@ -3246,40 +3198,6 @@
             }, 300); // Match CSS transition duration
         }
 
-        // Slider functionality (moved from redesign-indrive.html)
-        function initSlider(section) {
-            const track = section.querySelector('.pf-track');
-            const slides = section.querySelectorAll('.pf-slide');
-            const prev = section.querySelector('[data-action="pf-prev"]');
-            const next = section.querySelector('[data-action="pf-next"]');
-            const dotsWrap = section.querySelector('.pf-dots');
-            
-            if (!track || !slides.length) return; // Exit if no slider elements
-
-            let idx = 0;
-            
-            function show(i) {
-                idx = (i + slides.length) % slides.length;
-                track.style.transform = `translateX(-${idx * 100}%)`;
-                section.querySelectorAll('.pf-dot').forEach((d, k) => d.classList.toggle('active', k === idx));
-            }
-
-            // Create dots
-            if (dotsWrap) { // Ensure dotsWrap exists before manipulating
-                dotsWrap.innerHTML = ''; // Clear existing dots before adding new ones
-                slides.forEach((_, i) => {
-                    const b = document.createElement('button');
-                    b.className = 'pf-dot' + (i === 0 ? ' active' : '');
-                    b.addEventListener('click', () => show(i));
-                    dotsWrap.appendChild(b);
-                });
-            }
-
-            prev && prev.addEventListener('click', () => show(idx - 1));
-            next && next.addEventListener('click', () => show(idx + 1));
-            show(0);
-        }
-
         // Handler for the back button, passed to event listener
         function restorePortfolioHandler(e) {
             e.preventDefault();
@@ -3287,24 +3205,36 @@
         }
 
         // Updated initPortfolioDetail to handle different content types
-        function initPortfolioDetail(id) {
+        function initPortfolioDetail() {
             const section = document.getElementById('portfolio');
             const backBtn = section.querySelector('[data-action="back-portfolio"]');
-            // Ensure the back button is always bound
-            if (backBtn) {
-                // Remove existing listener to prevent duplicates
-                backBtn.removeEventListener('click', restorePortfolioHandler); 
-                backBtn.addEventListener('click', restorePortfolioHandler);
+            backBtn && backBtn.addEventListener('click', (e) => { e.preventDefault(); restorePortfolio(); });
+
+            // Slider
+            const track = section.querySelector('.pf-slides');
+            const slides = section.querySelectorAll('.pf-slide');
+            const prev = section.querySelector('[data-action="pf-prev"]');
+            const next = section.querySelector('[data-action="pf-next"]');
+            const dotsWrap = section.querySelector('.pf-dots');
+            if (!track || !slides.length) return;
+
+            let idx = 0;
+            function show(i) {
+                idx = (i + slides.length) % slides.length;
+                track.style.transform = `translateX(-${idx * 100}%)`;
+                section.querySelectorAll('.pf-dot').forEach((d, k) => d.classList.toggle('active', k === idx));
             }
 
-            // Conditionally initialize based on ID
-            if (id === 'redesign-indrive') {
-                initSlider(section);
-            }
-            // If you add specific JS for image grids, uncomment and implement initImageGrid(section);
-            // else if (id === 'portal-berita' || id === 'admin-fyp2') {
-            //     // initImageGrid(section); 
-            // }
+            slides.forEach((_, i) => {
+                const b = document.createElement('button');
+                b.className = 'pf-dot' + (i === 0 ? ' active' : '');
+                b.addEventListener('click', () => show(i));
+                dotsWrap && dotsWrap.appendChild(b);
+            });
+
+            prev && prev.addEventListener('click', () => show(idx - 1));
+            next && next.addEventListener('click', () => show(idx + 1));
+            show(0);
         }
 
         // Initial setup for portfolio section when DOM is ready
