@@ -1,0 +1,325 @@
+<!-- Header & Navigation -->
+<header>
+    <div class="container header-container">
+        <div class="logo">Reyhan.</div>
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#activities">Aktivitas</a></li>
+                <li><a href="#certificates">Sertifikat</a></li>
+                <li><a href="#portfolio">Portofolio</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Hamburger Menu Button -->
+        <button class="hamburger-menu" id="hamburgerBtn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-logo">Menu</div>
+                <button class="close-menu" id="closeMenuBtn" aria-label="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="#home" class="mobile-nav-link">Home</a></li>
+                    <li><a href="#about" class="mobile-nav-link">Tentang</a></li>
+                    <li><a href="#activities" class="mobile-nav-link">Aktivitas</a></li>
+                    <li><a href="#certificates" class="mobile-nav-link">Sertifikat</a></li>
+                    <li><a href="#portfolio" class="mobile-nav-link">Portofolio</a></li>
+                    <li><a href="#resume" class="mobile-nav-link">Resume</a></li>
+                    <li><a href="#contact" class="mobile-nav-link">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<style>
+/* Reset untuk mobile menu */
+.mobile-menu-overlay *,
+.mobile-menu-overlay *::before,
+.mobile-menu-overlay *::after {
+    box-sizing: border-box;
+}
+
+/* Hamburger Menu Styles */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    transition: var(--transition);
+}
+
+.hamburger-menu span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+    border-radius: 2px;
+    transition: var(--transition);
+    transform-origin: center;
+}
+
+.hamburger-menu:hover span {
+    background: linear-gradient(45deg, var(--accent-end), var(--accent-start));
+}
+
+/* Hamburger Animation */
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+/* Mobile Menu Card */
+.mobile-menu {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(18, 18, 18, 0.98));
+    border-radius: 20px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 
+        0 25px 80px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0.8) translateY(-50px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-menu-overlay.active .mobile-menu {
+    transform: scale(1) translateY(0);
+}
+
+/* Mobile Menu Header */
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Poppins', sans-serif;
+}
+
+.close-menu {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.close-menu:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent-end);
+    transform: rotate(90deg);
+}
+
+/* Mobile Navigation - PERBAIKAN UTAMA */
+.mobile-nav {
+    width: 100%;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.mobile-nav ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    display: block;
+}
+
+.mobile-nav ul li {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: block !important;
+    width: 100%;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+.mobile-nav ul li:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav-link {
+    display: block !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    padding: 1.2rem 0 !important;
+    font-weight: 500;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus {
+    color: var(--accent-end) !important;
+    padding-left: 1.2rem !important;
+    transform: translateX(0);
+}
+
+.mobile-nav-link::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-link:hover::before {
+    left: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .desktop-nav {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        display: flex;
+    }
+}
+
+@media (min-width: 993px) {
+    .hamburger-menu {
+        display: none !important;
+    }
+    
+    .mobile-menu-overlay {
+        display: none !important;
+    }
+}
+
+/* Animation untuk menu items - DIPERBAIKI */
+.mobile-menu-overlay.active .mobile-nav ul li {
+    animation: slideInFromRight 0.4s ease forwards;
+}
+
+.mobile-menu-overlay.active .mobile-nav ul li:nth-child(1) { 
+    animation-delay: 0.1s; 
+}
+.mobile-menu-overlay.active .mobile-nav ul li:nth-child(2) { 
+    animation-delay: 0.15s; 
+}
+.mobile-menu-overlay.active .mobile-nav ul li:nth-child(3) { 
+    animation-delay: 0.2s; 
+}
+.mobile-menu-overlay.active .mobile-nav ul li:nth-child(4) { 
+    animation-delay: 0.25s; 
+}
+.mobile-menu-overlay.active .mobile-nav ul li:nth-child(5) { 
+    animation-delay: 0.3s; 
+}
+.mobile-menu-overlay.active .mobile-nav ul li:nth-child(6) { 
+    animation-delay: 0.35s; 
+}
+.mobile-menu-overlay.active .mobile-nav ul li:nth-child(7) { 
+    animation-delay: 0.4s; 
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Prevent body scroll when mobile menu is open - PERBAIKAN */
+body.mobile-menu-open {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+    top: 0; /* Reset top position */
+}
+</style>

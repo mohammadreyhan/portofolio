@@ -16,7 +16,7 @@
             --accent-start: #2AF598;
             --accent-end: #009EFD;
             --transition: all 0.3s ease;
-            --texture-dark: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            --texture-dark: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
             --texture: var(--texture-dark);
         }
 
@@ -304,7 +304,7 @@
 
         /* Section Styling */
         section {
-            padding: 3rem 0 6rem;
+            padding: 4.3rem 0 6rem;
             position: relative;
             background-image: var(--texture);
             background-attachment: fixed;
@@ -530,9 +530,17 @@
           transform: translateY(0);
         }
 
+        /* Mobile: Always show detail badge */
+        @media (max-width: 992px) {
+            .activity-item::before {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Sertifikat Section */
         .certificates {
-            padding: 5rem 0;
+            padding: 2.8rem 0;
         }
 
         .certificates-grid {
@@ -1390,6 +1398,24 @@
         }
 
         @media (max-width: 576px) {
+            /* Header - Navbar lebih tipis untuk mobile */
+            header {
+                padding: 0.5rem 0; /* Mengurangi padding dari 1rem menjadi 0.5rem */
+            }
+            
+            .logo {
+                font-size: 1.9rem; /* Mengurangi ukuran logo */
+            }
+            
+            nav ul li {
+                margin-left: 1rem; /* Mengurangi margin antar menu */
+            }
+            
+            nav ul li a {
+                padding: 0.3rem 0; /* Mengurangi padding menu */
+                font-size: 0.9rem; /* Mengurangi ukuran font menu */
+            }
+            
             /* Certificates Section */
             .certificates-grid {
                 grid-template-columns: 1fr;
@@ -2017,67 +2043,187 @@
             opacity: 1;
             transform: scale(1);
         }
-    </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init("__0mLYTTReShaxzrQ"); // Ganti dengan User ID EmailJS Anda
-        })();
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Dapatkan formulir
-            const contactForm = document.getElementById('contact-form');
+        /* Footer Styles */
+        .footer-minimal {
+            background: linear-gradient(180deg, rgba(18, 18, 18, 0.95), rgba(12, 12, 12, 0.98));
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
 
-            // Periksa apakah formulir ditemukan sebelum menambahkan event listener
-            if (contactForm) {
-                // Tambahkan event listener untuk submit formulir
-                contactForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Mencegah pengiriman formulir default
+        .footer-minimal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-start), var(--accent-end), transparent);
+        }
 
-                    // Kumpulkan data formulir
-                    const formData = {
-                        from_name: document.getElementById('from_name').value,
-                        subject: document.getElementById('subject').value, // Tambahkan baris ini
-                        from_email: document.getElementById('from_email').value,
-                        message: document.getElementById('message').value,
-                    };
+        .footer-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0 1rem;
+            gap: 2rem;
+        }
 
-                    // Kirim email menggunakan EmailJS
-                    emailjs.send("service_ybk2qgj", "template_nzksmhc", formData)
-                        .then(function(response) {
-                            console.log('SUCCESS!', response.status, response.text);
-                            alert('Pesan Anda telah berhasil dikirim!');
-                            contactForm.reset(); // Reset formulir setelah pengiriman berhasil
-                        }, function(error) {
-                            console.log('FAILED...', error);
-                            alert('Maaf, ada masalah saat mengirim pesan Anda. Silakan coba lagi nanti.');
-                        });
-                });
-            } else {
-                console.error("Formulir dengan ID 'contact-form' tidak ditemukan.");
+        .footer-brand .footer-logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .footer-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-cta {
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .footer-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-end), var(--accent-start));
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .footer-cta:hover::before {
+            left: 0;
+        }
+
+        .footer-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 245, 152, 0.3);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            padding: 1rem 0 1rem;
+        }
+
+        .footer-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin-bottom: 1rem;
+        }
+
+        .footer-copyright {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .footer-copyright p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .footer-heart {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .footer-heart i {
+            color: #ff6b6b;
+            animation: heartbeat 2s infinite;
+            font-size: 0.8rem;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .footer-main {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 1.5rem 0 0.8rem;
             }
-        });
-    </script>
+            
+            .footer-actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .footer-copyright {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .footer-bottom {
+                padding: 1rem 0 0;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">Reyhan.</div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#activities">Aktivitas</a></li>
-                    <li><a href="#certificates">Sertifikat</a></li>
-                    <li><a href="#portfolio">Portofolio</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <!-- <li><a href="#testimonial">Testimoni</a></li> -->
-                    <li><a href="#contact">Kontak</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Include Navbar -->
+    <div id="navbar-container"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -2542,9 +2688,35 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer-minimal">
         <div class="container">
-            <p>© 2025 Mohammad Reyhan | Designed & Developed with dedication</p>
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">Reyhan.</div>
+                    <p>Turning ideas into meaningful digital experiences</p>
+                </div>
+                
+                <div class="footer-actions">
+                    <a href="#contact" class="footer-cta">Let's Connect</a>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-line"></div>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Mohammad Reyhan</p>
+                    <div class="footer-heart">
+                        <span>Made with</span>
+                        <i class="fas fa-heart"></i>
+                        <span>in Indonesia</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -2577,7 +2749,11 @@
     <script>
         AOS.init({
             duration: 800,
-            once: true
+            once: true,
+            // Disable AOS animations when screen width is 576px or less
+            disable: function () {
+                return window.innerWidth <= 576;
+            }
         });
         
         // Smooth scrolling for navigation
@@ -3310,6 +3486,148 @@
                 backToTopBtn.classList.add('show');
             }
         });
+
+        // Load navbar
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+                initializeHamburgerMenu();
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        // Smooth Scrolling Function - DIPERBAIKI untuk offset yang lebih besar
+        function smoothScrollTo(targetId) {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                // Menambah offset yang lebih besar untuk section lebih terlihat
+                const additionalOffset = 0; // 60px tambahan margin dari header
+                const targetPosition = targetElement.offsetTop - headerHeight - additionalOffset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Hamburger Menu Functionality
+        function initializeHamburgerMenu() {
+            let scrollPosition = 0;
+            
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            
+            if (hamburgerBtn) {
+                hamburgerBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Simpan scroll position sebelum menu terbuka
+                    scrollPosition = window.scrollY;
+                    
+                    hamburgerBtn.classList.add('active');
+                    mobileMenuOverlay.classList.add('active');
+                    document.body.classList.add('mobile-menu-open');
+                    document.body.style.top = `-${scrollPosition}px`;
+                });
+            }
+            
+            if (closeMenuBtn) {
+                closeMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeMobileMenu();
+                });
+            }
+            
+            // Handle mobile nav link clicks
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const targetId = this.getAttribute('href');
+                    closeMobileMenu();
+                    
+                    // Add delay before scrolling to allow menu to close smoothly
+                    setTimeout(() => {
+                        smoothScrollTo(targetId);
+                    }, 300);
+                });
+            });
+            
+            // Handle overlay click (outside menu)
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.addEventListener('click', function(e) {
+                    if (e.target === mobileMenuOverlay) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closeMobileMenu();
+                    }
+                });
+            }
+            
+            // Close mobile menu function
+            function closeMobileMenu() {
+                if (hamburgerBtn && mobileMenuOverlay) {
+                    hamburgerBtn.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                    
+                    // Restore scroll position
+                    document.body.style.top = '';
+                    window.scrollTo(0, scrollPosition);
+                }
+            }
+            
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (mobileMenuOverlay && mobileMenuOverlay.classList.contains('active')) {
+                        closeMobileMenu();
+                    }
+                }
+            });
+            
+            // Close menu on window resize if desktop view
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992) {
+                    if (mobileMenuOverlay && mobileMenuOverlay.classList.contains('active')) {
+                        closeMobileMenu();
+                    }
+                }
+            });
+        }
+
+        // Unified Navigation Handler
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle all navigation links with exclusion for mobile menu elements
+            document.addEventListener('click', function(e) {
+                // Exclude hamburger button dan mobile menu elements
+                if (e.target.closest('#hamburgerBtn') || 
+                    e.target.closest('.mobile-menu-overlay') || 
+                    e.target.closest('.mobile-nav-link') ||
+                    e.target.closest('#closeMenuBtn')) {
+                    return;
+                }
+                
+                // Handle navigation links
+                if (e.target.matches('a[href^="#"]')) {
+                    e.preventDefault();
+                    const targetId = e.target.getAttribute('href');
+                    
+                    if (targetId === '#') return;
+                    
+                    smoothScrollTo(targetId);
+                }
+            });
+        });
+
+        // ... existing JavaScript code ...
     </script>
 </body>
 </html>
