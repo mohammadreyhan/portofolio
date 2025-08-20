@@ -7,6 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Ganti dengan EmailJS User ID Anda
+            emailjs.init("__0mLYTTReShaxzrQ");
+        })();
+    </script>
     <style>
         :root {
             --bg-dark: #121212;
@@ -1101,6 +1109,59 @@
         .contact-form button {
             margin-top: 1rem;
             align-self: flex-start;
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(42, 245, 152, 0.3);
+        }
+
+        .contact-form button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-success {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .alert-danger {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: #F44336;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .alert i {
+            font-size: 1.2em;
         }
 
         .social-card {
@@ -1596,10 +1657,6 @@
         }
         .activity-detail-popup .popup-content::-webkit-scrollbar {
           width: 10px;
-        }
-        .activity-detail-popup .popup-content::-webkit-scrollbar-track {
-          background: rgba(255,255,255,0.08);
-          border-radius: 8px;
         }
         .activity-detail-popup .popup-content::-webkit-scrollbar-thumb {
           background: rgba(255,255,255,0.35);
@@ -2653,8 +2710,19 @@
                             <label for="message">Pesan Anda:</label>
                             <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <span class="btn-text">Kirim Pesan</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Mengirim...
+                            </span>
+                        </button>
                     </form>
+                    <div id="success-message" class="alert alert-success" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Pesan berhasil dikirim! Terima kasih telah menghubungi saya.
+                    </div>
+                    <div id="error-message" class="alert alert-danger" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> Terjadi kesalahan. Silakan coba lagi.
+                    </div>
                 </div>
                 <div class="social-links">
                     <div class="social-card">
@@ -2710,6 +2778,9 @@
                 <div class="footer-line"></div>
                 <div class="footer-copyright">
                     <p>&copy; 2025 Mohammad Reyhan</p>
+                    <div class="footer-heart">
+                        <span>Personal Portfolio</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3620,6 +3691,74 @@
                     smoothScrollTo(targetId);
                 }
             });
+        });
+
+        // Contact Form Handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    submitBtn.disabled = true;
+                    btnText.style.display = 'none';
+                    btnLoading.style.display = 'inline-block';
+                    
+                    // Hide previous messages
+                    successMessage.style.display = 'none';
+                    errorMessage.style.display = 'none';
+
+                    // Get form data
+                    const formData = {
+                        from_name: document.getElementById('from_name').value,
+                        subject: document.getElementById('subject').value,
+                        from_email: document.getElementById('from_email').value,
+                        message: document.getElementById('message').value
+                    };
+
+                    // Send email using EmailJS
+                    // Ganti dengan Service ID dan Template ID Anda
+                    emailjs.send('service_ybk2qgj', 'template_nzksmhc', formData)
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                            
+                            // Show success message
+                            successMessage.style.display = 'block';
+                            
+                            // Reset form
+                            contactForm.reset();
+                            
+                            // Hide success message after 5 seconds
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                            }, 5000);
+                        })
+                        .catch(function(error) {
+                            console.log('FAILED...', error);
+                            
+                            // Show error message
+                            errorMessage.style.display = 'block';
+                            
+                            // Hide error message after 5 seconds
+                            setTimeout(() => {
+                                errorMessage.style.display = 'none';
+                            }, 5000);
+                        })
+                        .finally(function() {
+                            // Reset button state
+                            submitBtn.disabled = false;
+                            btnText.style.display = 'inline-block';
+                            btnLoading.style.display = 'none';
+                        });
+                });
+            }
         });
 
         // ... existing JavaScript code ...
