@@ -1,0 +1,50 @@
+<style>
+.timeline-detail-content .sosmed-detail { margin-top: 4px; }
+
+.timeline-detail-content .sosmed-title {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: .2px;
+}
+.timeline-detail-content .sosmed-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+
+.timeline-detail-content .detail-list {
+  list-style: none;
+  padding-left: 15px;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.timeline-detail-content .detail-list li {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 900px) {
+  .timeline-detail-content .detail-list { grid-template-columns: 1fr 1fr; }
+}
+</style>
+
+<div class="sosmed-detail">
+  <div class="sosmed-title">Rincian Tugas Utama</div>
+  <ul class="detail-list">
+    <li>Mengunggah serta memperbarui lebih dari 100 produk di Shopee dan Tokopedia, termasuk pengeditan gambar atau carousel, pembaruan foto, deskripsi, dan harga produk.</li>
+    <li>Menata ulang tampilan katalog produk lama agar lebih menarik dan sesuai dengan standar tampilan toko.</li>
+    <li>Mengelola akun Instagram dan TikTok, termasuk mengunggah konten, menjaga konsistensi tampilan toko, serta membalas pesan yang masuk melalui DM.</li>
+    <li>Menanggapi pesan pelanggan melalui WhatsApp dengan respons cepat dan pelayanan yang informatif.</li>
+  </ul>
+</div>
