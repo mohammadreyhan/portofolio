@@ -191,9 +191,9 @@
         }
 
         .hero-text {
-            text-align: left; 
-            max-width: 600px; 
-            margin-right: auto; 
+            text-align: left; /* Mengatur teks ke kiri */
+            max-width: 600px; /* Sesuaikan lebar maksimum sesuai kebutuhan */
+            margin-right: auto; /* Memastikan teks tetap di kiri */
         }
 
         .hero-img {
@@ -204,9 +204,9 @@
         }
 
         .profile-img {
-            width: 100%; 
-            max-width: 320px; 
-            height: auto; 
+            width: 100%; /* Mengisi lebar elemen induk */
+            max-width: 320px; /* Memastikan tidak lebih besar dari 320px */
+            height: auto; /* Mempertahankan rasio aspek */
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid transparent;
@@ -282,9 +282,9 @@
         }
 
         .btn-primary {
-            padding: 0.9rem 2rem;           
-            border: 0;                      
-            border-radius: 999px;           
+            padding: 0.9rem 2rem;           /* opsional: ukuran seperti awal */
+            border: 0;                       /* hilangkan border transparan */
+            border-radius: 999px;            /* pill penuh */
             background: linear-gradient(45deg, var(--accent-start), var(--accent-end)) border-box;
             -webkit-background-clip: border-box;
             background-clip: border-box;
@@ -292,10 +292,10 @@
             box-shadow: 0 12px 30px rgba(0, 158, 253, 0.25);
         }
 
-        
+        /* Matikan overlay global pada btn-primary agar tidak muncul garis di pinggir */
         .btn-primary::before { content: none; }
 
-        
+        /* Hover tetap halus */
         .btn-primary:hover {
           transform: translateY(-4px) scale(1.03);
           box-shadow: 0 16px 36px rgba(0, 158, 253, 0.32);
@@ -310,7 +310,7 @@
             border-radius: 0;
         }
 
-        
+        /* Section Styling */
         section {
             padding: 4.3rem 0 6rem;
             position: relative;
@@ -333,9 +333,9 @@
         .section-title {
         font-size: 2.5rem;
         text-align: center;
-        margin: 0 auto 4rem;  
+        margin: 0 auto 4rem;   /* center horizontally */
         position: relative;
-        display: table;        
+        display: table;        /* shrink-to-fit then center with margin auto */
         }
 
         .section-title:after {
@@ -3801,6 +3801,8 @@
                 });
             }
         });
+
+        // ... existing JavaScript code ...
     </script>
 </body>
 </html>
